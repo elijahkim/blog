@@ -1,0 +1,43 @@
+---
+layout: post
+title: "Tic-Tac-Toe pt2"
+subtitle: "Starting to Code"
+date: 2014-10-11 11:07
+categories: programs
+---
+
+Ok let's finally get started.
+
+As I mentioned before, I started with the Player Class which would primarily
+include a naming scheme and a method to input data. So here's how it started.
+
+{% highlight ruby %}
+class Player
+  attr_reader :name
+  def initialize(name)
+    @name = name
+  end
+end
+{% endhighlight %}
+
+I figured, I'd probably have to access the name in other places so I made the
+name so I set that up instantly.
+
+Cool.
+
+Now let's make a method get_input. The method will ask for the player's x and
+y coordinated and return them! Seems simple enough. Maybe something like this.
+
+{% highlight ruby %}
+def get_input
+  puts "some statement"
+  print "x: "
+  x = gets.chomp.to_i
+  print "y: "
+  y = gets.chomp.to_i
+  [y, x]
+end
+{% endhighlight %}
+
+And that's the player class. 
+Easy.

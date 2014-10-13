@@ -1,0 +1,17 @@
+# Site settings
+title: Eli's Coding Journey
+email: iam@elijah.kim
+description: > # this means to ignore newlines until "baseurl:"
+  In this blog I will be documenting my journey of learning to code. You will
+  see a mix code explainations, learning halts, and much much more.
+
+  Enjoy,
+
+  Elijah Kim
+baseurl: "/blog/" # the subpath of your site, e.g. /blog/
+url: "http://elijah.kim"
+twitter_username: elikim1121
+github_username: elijahkim 
+
+# Build settings
+markdown: kramdown

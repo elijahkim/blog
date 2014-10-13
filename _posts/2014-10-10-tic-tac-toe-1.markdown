@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Tic-Tac-Toe pt1"
+subtitle: "The Breathe"
+date: 2014-10-10 21:10
+categories: programs
+---
+
+Apparently Tic Tac Toe is an easy program to make. However, each way I thought
+about it, it didn't seam as easy as it sounded so I decided to at least have
+this under my belt. This was my thought process.
+
+What do I need?
+
+I figured I would need at least a Game Class, a Player Class, and a Board Class.
+By separating these classes, I was able to easily give each class methods so
+that each class had only one job to do. In this case, the Player would be a
+player and the Game would be the game and so on.
+
+What do I need each class to do?
+
+The Player Class was... well the player. It would take the X's and O's. Have
+player names and be the sole communicator between the user and the program.
+
+The Board Class was a bit more complicated. It needed to have a layout of a Tic
+Tac Toe board, be able to display the current status of the board, and place moves
+where needed.
+
+The Game Class would need to basically be the Class that uses the two other
+classes so that the player and the board could communicate with each other. It
+basically served as a moderator. This Class would have to get moves and tell the
+board what it was. Also, most of the game logic was in this class as well.
+
+Now what?
+
+I started with the Player Class. It seemed the simplest. 
