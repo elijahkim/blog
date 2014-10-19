@@ -1,0 +1,120 @@
+---
+layout: post
+title: "Tic-Tac-Toe pt3"
+subtitle: "Creating the Board"
+date: 2014-10-19 16:06
+categories: programs
+---
+
+This post, we will make the Board class. Lets this about what it would haveto do
+
+First: 
+The first thing we would need for it to do would be to have a board! a
+tic tac toe board has a 3x3 layout. The first thing that came to mind for me was
+a 3x3 2 dimensional array. Maybe theres a better way to do this but for now we
+will stick with this. 
+
+Second:
+It would be pretty useful to have a method to show the current status of the
+board.
+
+Third:
+We will need a method to take the input of a player and place that input on the
+board.
+
+I feel like these 3 methods are just what are needed to start the game. So lets
+get started!
+
+To take care of the first method, I created an array in the initialize method.
+
+{% highlight ruby %}
+class TicTacToe
+  def initialize
+    @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
+  end
+end
+{% endhighlight %}
+Cool that was easy!
+
+Next, lets take care of the second method
+
+{% highlight ruby %}
+def show_board
+  @board.each do |row|
+    puts row
+  end
+end
+{% endhighlight %}
+
+This seems about right. However, when we test it, nothing shows up!
+This is because puts implicetely calls `to_s`. In this case, our array is only
+filled with empty strings. To get around this, we can call another method
+`inspect` which instead returns a "human-readable" representation of an obj.
+So instead if we do this:
+
+{% highlight ruby %}
+def show_board
+  @board.each do |row|
+    puts row.inspect
+  end
+end
+{% endhighlight %}
+
+it returns 
+
+{% highlight ruby %}
+[" ", " ", " "]
+[" ", " ", " "]
+[" ", " ", " "]
+{% endhighlight %}
+
+Alright, lets take care of the last method now. A way to place a user's input.
+Honestly this might even belong in the `Game` class but I decided to put it
+here. Maybe later we can refactor it and place it in the `Game` class. 
+
+So in this method, we would have to receive an input from a player and fill that
+box with that player's name. It sounds like to me like these would be arguments
+of that method. At the same time, lets set some variables that we would need.
+
+{% highlight ruby %}
+def place_input input, player
+  input = input
+  name = player.name
+end
+{% endhighlight %}
+
+Great, now all we have to do is place that player's name in the position of the
+player's choosing.
+
+{% highlight ruby %}
+def place_input input, player
+  input = input
+  name = player.name
+  @board[input[0][input[1]] = name
+end
+{% endhighlight %}
+
+Okay. How did that work? O.o What? 
+
+If we remember the player class, our `get_input` method was like this,
+
+{% highlight ruby %}
+def get_input name                                         
+   name = name                                              
+   puts "it is now, player #{name}'s turn"·                 
+   print "x: "                                              
+   x = gets.chomp.to_i         
+   print "y: "                 
+   y = gets.chomp.to_i         
+   [y,x]                       
+end           
+{% endhighlight %}
+
+The method returned an array `[y,x]` which is a bit confusing and we can work on
+this later. But we can use this and pass this input to our `place_input`
+method. Then all we have to do is take these input's `y` and `x` values, and set
+that cell in our array with the player's name. 
+
+I hope this made sense.
+
+And that ends our board class. For now!
