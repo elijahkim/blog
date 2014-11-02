@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Tic-Tac-Toe pt 4"
+subtitle: "Starting the Game Class"
+date: 2014-10-21 8:32
+categories: Programs
+---
+
+At this point, we've finished the player logic and the board logic. I would say
+that the hard part is pretty much over. All we have to do now is get the actual
+game logic down. So normally, in a game of tic tac toe, each player would take
+turns deciding on a place to put their mark. To start, whenever a game starts,
+let's have it so that two players are made, the "X" player and the "O' player
+and a new instance of the board is created.
+Also, lets try to determine what a turn is and we can make a method out of
+that. Finally, let's start a play method which would loop through every command
+that the game has to go through.
+
+{% highlight ruby %}
+class Game
+  def initialize
+    @player_one = Player.new("X")
+    @player_two = Player.new("O")
+    @board = TicTacToe.new
+  end
+
+  def play
+    turn(player_one)
+    turn(player_two)
+  end
+
+  def turn(player)
+    input = player.get_input(player.name)
+    @board.place_input(input, player)
+  end
+end
+{% endhighlight %}
+
+Don't forget about our `get_input` method from the `Player class` and the
+`place_input` method from the `Board class`.
+
+So this should be executable at this rate. Each time we run the file game.rb the
+game will start with 2 players and a tic tac toe board. After that starts, each
+player can take turns filling in the board! AWESOME. However, we are far from
+done. How will the game know when to stop? What if we give an input that we
+actually shouldn't be able to? Let's tackle these problems one by one.

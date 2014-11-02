@@ -1,0 +1,102 @@
+---
+layout: post
+title: "Tic-Tac-Toe pt5"
+subtitle: "Continuing the Game Class"
+date: 2014-10-27 7:54
+categories: programs
+---
+
+The game works... sorta... we're able to start a game and put in some inputs.
+That's wonderful but don't you think some things are missing? The game doesn't
+stop, the only way to really stop the program is to break the program and that's
+not very optimal. Furthermore, what happens if a player tries to put his or her
+mark at [4, 1]? Yikes! That shouldn't work! 
+
+To get the game to really work right, we should probably fix these problems.
+Let's start with the easier one, setting input boundries. All we have to do is
+make sure their coordinates are less than 3. Like this
+
+{% highlight ruby %}
+def in_the_boundires? input
+  input[0] < 3 && input[1] <3
+end
+{% endhighlight %}
+
+Remember, the input we're getting gets returned as an array where `input[0]` is
+the `x` coordinate and `input[1]` is the `y` coordinate.
+
+While we're at it, we should not allow a player to place their mark in a spot
+that's already occupied. To do this, we can just make sure that their input is
+empty.
+
+{% highlight ruby %}
+def already_exists? input
+  @board[input[0]][input[1]] == " "
+end
+{% endhighlight %}
+
+And we can combine these two predicate methods to make it a little bit cleaner.
+
+{% highlight ruby %}
+def check_input? input
+ in_the_boundires? input && already_exists? input
+end
+{% endhighlight %}
+
+Doing this, we can call `check_input?` on each input that a player gives
+and we can check if it is both in the boundries and if there already exists a
+mark on that spot.
+
+Now let's tackle the harder problem. Checking if a player has won. To start, we
+can just check each case. That means checking if each column has the same input,
+if each row has the same input, or if each diagonal has the same input. This
+will be a bit tedious but later on we can work on a more elegant solution.
+Anyway, in the end it should look like this.
+
+{% highlight ruby %}
+def horizontal?(player)
+  @board[0][0] == player.name && 
+  @board[0][1] == player.name && 
+  @board[0][2] == player.name ||
+  @board[1][0] == player.name && 
+  @board[1][1] == player.name && 
+  @board[1][2] == player.name || 
+  @board[2][0] == player.name && 
+  @board[2][1] == player.name && 
+  @board[2][2] == player.name·
+end
+
+def vertical?(player)
+  @board[0][0] == player.name && 
+  @board[1][0] == player.name && 
+  @board[2][0] == player.name ||
+  @board[0][1] == player.name && 
+  @board[1][1] == player.name && 
+  @board[2][1] == player.name ||
+  @board[0][2] == player.name && 
+  @board[1][2] == player.name && 
+  @board[2][2] == player.name·
+end
+
+def diagonal?(player)
+  @board[0][0] == player.name && 
+  @board[1][1] == player.name && 
+  @board[2][2] == player.name ||
+  @board[0][2] == player.name && 
+  @board[1][1] == player.name && 
+  @board[2][0] == player.name·
+end
+{% endhighlight %}
+
+It's ugly but it does the job. I don't think this makes sense to anyone, but we
+can fix that later. Instead let's make a method to check all these win
+possibilities.
+
+{% highlight ruby %}
+def won?(player)
+  horizontal?(player)||vertical?(player)||diagonal?(player) 
+end
+{% endhighlight %}
+
+In the next post, we will finish up the game class and be able to play our
+tic-tac-toe game!
