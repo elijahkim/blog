@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Learn Why Not How"
+title: "Learn Why And How"
 subtitle: "How to learn to code"
 date: 2014-11-02 18:02
 categories: how-to
@@ -24,22 +24,22 @@ answers was a tedious task.
 To really know how to code, you must have a relational understanding of what
 code actually is. Don't worry so much about syntax. Syntax is always documented.
 And as long as you know what you need, you can find the syntax in the docs.
-If you're still having trouble after reading the docs, you can go to other resources like stack
-overflow. However, if you don't even know what you're searching for, you're
+If you're still having trouble after reading the docs, you can go to other resources like [Stack
+Overflow](http://stackoverflow.com/). However, if you don't even know what you're searching for, you're
 gonna have a bad time.
 
 ![gonna have a bad time.jpg](http://www.memecreator.org/static/images/templates/14603.jpg)
 
-Instead, when reading code, learning code, or writing code, think about why code
-is that way. 
+Instead, when reading code, learning code, or writing code, think about how the
+code works.
 
 As an example, let's look at something that every rails programmer has used. The
-`Has Many` relationship. It's a necessity in back end development, but not
+`has_many` relationship. It's a necessity in back end development, but not
 everyone knows how it works. We all know that in order to have one model relate
 to many objects in another model, we need a has many relationship, such as a
 team that has many players. This is pretty much known fact, and common
 knowledge. What more do we have to do but put one line of code in the Team
-Model? 
+Model?
 
 {% highlight ruby %}
 has many :players
@@ -47,7 +47,7 @@ has many :players
 
 But what if a player can be on many teams? Or, let's get a little
 crazy, a player has many teammates? Holy cow. Hold your horses. Things just got
-super complicated. A simple has many relationship won't work here. We're going
+super complicated. A simple has_many relationship won't work here. We're going
 to need a many to many through for the player to also have many teams and then a
 many to many self for a player to have many teammates. Where I see many coders
 having trouble is right here. They always try to memorize the syntax instead of
