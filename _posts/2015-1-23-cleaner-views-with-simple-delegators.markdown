@@ -23,7 +23,7 @@ match_history view
 most of the view omitted
 ###
 <% @matches.each do |match| %>
-  <div class=<% if match.winner == current_user ? "winning_class" : "losing_class">
+  <div class=<% if match.winner == current_user ? "winning_class" : "losing_class">>
     <div><%= match.challenger %> vs <%= match.defender %></div>
     <div><%= match.match_at %></div>
     <% if match.winner == current_user %>
