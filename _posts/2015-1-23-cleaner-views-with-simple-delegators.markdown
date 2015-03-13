@@ -15,15 +15,14 @@ and be green if you won and red if you lost.
 This was the end result:
 ![alt-text](https://cloud.githubusercontent.com/assets/8673900/5492223/87060d8c-86ad-11e4-9c64-941f86a40754.png)
 
-The easiest way to do this is making a ridiculous number of if statements.
+The easiest solution is making a ridiculous number of if statements.
 
 {% highlight ruby %}
-###
-match_history view
-most of the view omitted
-###
+#match_history view
+#most of the view omitted
+
 <% @matches.each do |match| %>
-  <div class=<% if match.winner == current_user ? "winning_class" : "losing_class">>
+  <div class=<% if match.winner == current_user ? "winning_class" : "losing_class" %>>
     <div><%= match.challenger %> vs <%= match.defender %></div>
     <div><%= match.match_at %></div>
     <% if match.winner == current_user %>
@@ -36,5 +35,76 @@ most of the view omitted
 <% end %>
 {% endhighlight %}
 
-I'm sure you can all find a myriad of problems with this code. It is completely
-functional, but honestly, who wants to see that?
+But we're doing Ruby! This is some ugly ruby. There's a crap ton of logic in the
+views and... a ternary? are you insane?
+
+Intro, (Simple
+Delegators)[http://ruby-doc.org/stdlib-2.1.0/libdoc/delegate/rdoc/SimpleDelegator.html].
+ "A concrete implementation of Delegator, this class provides the means to delegate all supported method
+calls to the object passed into the constructor and even to change the object
+being delegated to at a later time with "
+
+Using this, we can make decorators to clean up our views.
+
+Let's start with the controller
+
+{% highlight ruby %}
+#match_history_controller
+def index
+  @matches = []
+  Match.each do |match|
+    if match.winner == current_user
+      @matches << WinningMatch.new(match)
+    else
+      @matches << LosingMatch.new(match)
+  end
+end
+{% endhighlight %}
+
+Then we can make these decorated matches
+
+{% highlight ruby %}
+class WinningMatch < SimpleDelegator
+  attr_reader :match
+
+  def initialize(match)
+    @match = match
+    super(@match)
+  end
+
+  def match_outcome_class
+    "match-stats-winner"
+  end
+
+  def elo_delta
+    "+ #{match.elo_delta}"
+  end
+
+  def win_or_lose
+    "won"
+  end
+end
+{% endhighlight %}
+
+We would do exactly the same for `LosingMatch` and in the `#index` action, our
+array of matches would be an array of `LosingMatch` and `WinningMatch`s that we
+can call the same methods on and have different returns. This is essentially
+Duck Typing.
+
+So in the end, we can create a partial like this
+
+{% highlight ruby %}
+<li class="<%= match.match_outcome_class %>">
+<div class="match-stats">
+  <p class="username"><%= match.challenger_username %> vs. <%= match.defender_username %></p>
+  <p><%= match.match_at.strftime("%F") %></p>
+  <p><%= match.win_or_lose %></p>
+  <p><%= match.elo_delta %> </p>
+  <p class="match-link"><%= link_to "Match Link", match_path(match) %></p>
+</div>
+</li>
+{% endhighlight %}
+
+In the end, we were able to take out the various if statements and employ simple
+delegators and duck typing to create a clean partial with absolutely no
+branching. I'd say that is an enormous win.
