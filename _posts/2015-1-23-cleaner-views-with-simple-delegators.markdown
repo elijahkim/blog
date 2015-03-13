@@ -86,10 +86,13 @@ class WinningMatch < SimpleDelegator
 end
 {% endhighlight %}
 
-We would do exactly the same for `LosingMatch` and in the `#index` action, our
-array of matches would be an array of `LosingMatch` and `WinningMatch`s that we
-can call the same methods on and have different returns. This is essentially
-Duck Typing.
+We would do exactly the same for `LosingMatch`.
+
+We would end up with an array of matches in our `#index` action
+that would be either a `LosingMatch` and `WinningMatch`s. The awesome conclusion
+to this is that we can call the same method to either `WinningMatch` or
+`LosingMatch` and they would know exactly what to return. This is called duck
+typing.
 
 So in the end, we can create a partial like this
 
@@ -105,6 +108,6 @@ So in the end, we can create a partial like this
 </li>
 {% endhighlight %}
 
-In the end, we were able to take out the various if statements and employ simple
+In conclusion, we were able to take out the various if statements and employ simple
 delegators and duck typing to create a clean partial with absolutely no
 branching. I'd say that is an enormous win.
