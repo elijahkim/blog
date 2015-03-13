@@ -17,7 +17,7 @@ This was the end result:
 
 The easiest solution is making a ridiculous number of if statements.
 
-{% highlight %}
+{% highlight erb %}
 #match_history view
 #most of the view omitted
 
@@ -38,8 +38,8 @@ The easiest solution is making a ridiculous number of if statements.
 But we're doing Ruby! This is some ugly ruby. There's a crap ton of logic in the
 views and... a ternary? are you insane?
 
-Intro, (Simple
-Delegators)[http://ruby-doc.org/stdlib-2.1.0/libdoc/delegate/rdoc/SimpleDelegator.html].
+Intro, [Simple
+Delegators](http://ruby-doc.org/stdlib-2.1.0/libdoc/delegate/rdoc/SimpleDelegator.html).
  "A concrete implementation of Delegator, this class provides the means to delegate all supported method
 calls to the object passed into the constructor and even to change the object
 being delegated to at a later time with "
