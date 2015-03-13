@@ -8,7 +8,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Enjoy,
 
   Elijah Kim
-baseurl: blog/  # the subpath of your site, e.g. /blog/
+baseurl: /blog/  # the subpath of your site, e.g. /blog/
 url: 
 twitter_username: monkeypatchr
 github_username: elijahkim 
