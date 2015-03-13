@@ -17,7 +17,7 @@ This was the end result:
 
 The easiest solution is making a ridiculous number of if statements.
 
-{% highlight erb %}
+{% highlight ruby %}
 #match_history view
 #most of the view omitted
 
@@ -96,7 +96,7 @@ typing.
 
 So in the end, we can create a partial like this
 
-{% highlight %}
+{% highlight ruby %}
 <li class="<%= match.match_outcome_class %>">
 <div class="match-stats">
   <p class="username"><%= match.challenger_username %> vs. <%= match.defender_username %></p>
